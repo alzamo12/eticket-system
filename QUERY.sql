@@ -105,3 +105,24 @@ select user_id, full_name, email from Users where full_name like 'Tanvir%' or fu
 select booking_id, user_id, match_id, coalesce(payment_status, 'Action Required') as systematic_status  from Bookings where payment_status is null
 
 
+
+-- Query 4: R
+
+select b.booking_id, u.full_name, m.fixture, b.total_cost from Bookings as b 
+  inner join Users as u on  b.user_id = u.user_id
+  inner join Matches as m on b.match_id = m.match_id
+
+
+--  Query 5: 
+
+select u.user_id, full_name, booking_id from Users as u left join Bookings as b on u.user_id = b.user_id
+
+
+-- Query 6: 
+
+select booking_id, match_id, total_cost from Bookings where total_cost > (select avg(total_cost) from Bookings)
+
+
+-- Query 7:
+
+select match_id, fixture, base_ticket_price from Matches order by base_ticket_price desc limit 2 offset 1; 
